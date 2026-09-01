@@ -1,22 +1,36 @@
-.rules {
-  text-align: left;
-  background: #f9f9ff;
-  border: 1px solid #e6e3ff;
-  border-radius: 10px;
-  padding: 14px 18px;
-  margin-bottom: 18px;
-}
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ event_name }} — Jigsaw Puzzle</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="brand-bg">
+<div class="container registration-wide">
+  <p class="eyebrow">{{ event_name }}</p>
+  <h1>🧩 Jigsaw Puzzle Challenge</h1>
 
-.rules h3 {
-  margin: 0 0 8px;
-  font-size: 1rem;
-  color: #333;
-}
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <div class="flash">{% for m in messages %}<p>{{ m }}</p>{% endfor %}</div>
+    {% endif %}
+  {% endwith %}
 
-.rules ul {
-  margin: 0;
-  padding-left: 20px;
-  font-size: 0.85rem;
-  color: #555;
-  line-height: 1.5;
-}
+  {% if config and config['image_name'] %}
+    <p class="subtitle">Today's puzzle is a {{ config['grid_size'] }} x {{ config['grid_size'] }} grid. Enter your name to begin!</p>
+    <form method="POST" class="card">
+      <label for="player_name">Your Name</label>
+      <input type="text" id="player_name" name="player_name" placeholder="Enter your name" required maxlength="40" autofocus>
+
+      <label for="reg_number">Registration Number</label>
+      <input type="text" id="reg_number" name="reg_number" placeholder="Enter your registration number" required maxlength="40">
+
+      <button type="submit">Start Puzzle 🚀</button>
+    </form>
+  {% else %}
+    <p class="subtitle">No puzzle has been set up yet. Please check back once the organizer uploads one.</p>
+  {% endif %}
+</div>
+</body>
+</html>
