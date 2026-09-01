@@ -231,6 +231,27 @@ button:hover { transform: translateY(-2px); }
   transition: transform 0.15s ease;
 }
 
+.header-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.reset-btn {
+  display: inline-block;
+  background: #d9534f;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: transform 0.15s ease;
+}
+
+.reset-btn:hover {
+  transform: translateY(-2px);
+}
+
 .export-btn:hover {
   transform: translateY(-2px);
 }

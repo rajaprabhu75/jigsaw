@@ -289,6 +289,20 @@ def admin_export():
         mimetype="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
     )
 
+@app.route("/admin/reset-players")
+def admin_reset_players():
+    if not session.get("is_admin"):
+        return redirect(url_for("admin_login"))
+
+    conn = get_db()
+    conn.execute("DELETE FROM registrations")
+    conn.execute("DELETE FROM leaderboard")
+    conn.commit()
+    conn.close()
+
+    flash("All player registrations and leaderboard entries have been cleared.")
+    return redirect(url_for("admin"))
+
 
 @app.route("/admin", methods=["GET", "POST"])
 def admin():

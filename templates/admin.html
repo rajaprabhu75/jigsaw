@@ -11,6 +11,10 @@
   <div class="dashboard-header">
     <p class="eyebrow">{{ event_name }}</p>
     <a class="export-btn" href="{{ url_for('admin_export') }}">⬇ Export to Excel</a>
+    <a class="reset-btn" href="{{ url_for('admin_reset_players') }}"
+   onclick="return confirm('This will permanently delete ALL registrations and leaderboard entries. Continue?');">
+  🗑 Reset Players
+</a>
   </div>
   <h1>📊 Admin Dashboard</h1>
 
