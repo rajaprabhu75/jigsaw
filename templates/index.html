@@ -19,6 +19,20 @@
 
   {% if config and config['image_name'] %}
     <p class="subtitle">Today's puzzle is a {{ config['grid_size'] }} x {{ config['grid_size'] }} grid. Enter your name to begin!</p>
+
+    <div class="rules">
+      <h3>📋 Game Rules</h3>
+      <ul>
+        <li>Enter your correct name and registration number to start.</li>
+        <li>Each registration number can only play <strong>once</strong> — choose carefully before you begin.</li>
+        <li>Tap one puzzle piece, then tap another, to swap their positions.</li>
+        <li>Arrange all the pieces to match the original picture to finish.</li>
+        <li>The timer starts as soon as the puzzle loads and stops when you solve it.</li>
+        <li>Do not refresh or close the tab once you've started — it may end your attempt.</li>
+        <li>Fastest completion time wins!</li>
+      </ul>
+    </div>
+
     <form method="POST" class="card">
       <label for="player_name">Your Name</label>
       <input type="text" id="player_name" name="player_name" placeholder="Enter your name" required maxlength="40" autofocus>
