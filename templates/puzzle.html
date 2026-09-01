@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ event_name }} — Solve the Puzzle</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="brand-bg">
+<div class="container puzzle-wide">
+  <p class="eyebrow">{{ event_name }}</p>
+  <h1>🧩 Good luck, {{ player_name }}!</h1>
+  <p class="reg-badge">Reg No: {{ reg_number }}</p>
+  <div class="hud">
+    <span>⏱️ <span id="timer">0.0s</span></span>
+    <span>Grid: {{ grid_size }} x {{ grid_size }}</span>
+  </div>
+
+  <div id="puzzle-board"></div>
+  <p class="hint">Tap a piece, then tap another piece to swap them. Arrange them to rebuild the photo!</p>
+</div>
+
+<div id="win-modal" class="modal">
+  <div class="modal-content">
+    <h2>🎉 Solved!</h2>
+    <img id="final-image" class="final-image" alt="Completed puzzle">
+    <p>Great job, {{ player_name }}! You finished in <strong id="final-time"></strong> seconds.</p>
+    <a href="{{ url_for('play_again') }}"><button>Finish</button></a>
+  </div>
+</div>
+
+<script>
+  const imageUrl = "{{ url_for('static', filename='uploads/' + image_name) }}";
+  const gridSize = {{ grid_size }};
+</script>
+<script src="{{ url_for('static', filename='js/puzzle.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ event_name }} — Admin Dashboard</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<div class="container wide">
+  <div class="dashboard-header">
+    <p class="eyebrow">{{ event_name }}</p>
+    <a class="export-btn" href="{{ url_for('admin_export') }}">⬇ Export to Excel</a>
+  </div>
+  <h1>📊 Admin Dashboard</h1>
+
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <div class="flash">{% for m in messages %}<p>{{ m }}</p>{% endfor %}</div>
+    {% endif %}
+  {% endwith %}
+
+  <div class="admin-grid">
+    <div class="panel">
+      <h2>Puzzle Setup</h2>
+      {% if config and config['image_name'] %}
+        <img class="preview" src="{{ url_for('static', filename='uploads/' + config['image_name']) }}" alt="Current puzzle image">
+        <p class="muted">Current difficulty: {{ config['grid_size'] }} x {{ config['grid_size'] }}</p>
+      {% else %}
+        <p class="muted">No puzzle set yet — upload one below.</p>
+      {% endif %}
+
+      <form method="POST" enctype="multipart/form-data" class="card">
+        <label for="image">Upload New Image {% if config and config['image_name'] %}(optional — leave blank to keep current){% endif %}</label>
+        <input type="file" id="image" name="image" accept="image/*" {% if not config or not config['image_name'] %}required{% endif %}>
+
+        <label for="grid_size">Difficulty</label>
+        <select id="grid_size" name="grid_size">
+          <option value="3" {% if config and config['grid_size']==3 %}selected{% endif %}>Easy (3 x 3)</option>
+          <option value="4" {% if config and config['grid_size']==4 %}selected{% endif %}>Medium (4 x 4)</option>
+          <option value="5" {% if config and config['grid_size']==5 %}selected{% endif %}>Hard (5 x 5)</option>
+        </select>
+
+        <button type="submit">Save Puzzle</button>
+      </form>
+    </div>
+
+    <div class="panel">
+      <h2>Overview</h2>
+      <div class="stats">
+        <div class="stat-box"><span>{{ total_registrations }}</span><label>Registered</label></div>
+        <div class="stat-box"><span>{{ total_games }}</span><label>Completed</label></div>
+        <div class="stat-box"><span>{{ total_players }}</span><label>Unique Finishers</label></div>
+      </div>
+    </div>
+  </div>
+
+  <h2>Registered Players</h2>
+  <p class="muted">Shows everyone as soon as they enter their name and start — before they finish.</p>
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr><th>#</th><th>Reg No</th><th>Player</th><th>Grid</th><th>Started At</th></tr>
+      </thead>
+      <tbody>
+        {% for row in registrations %}
+        <tr>
+          <td>{{ loop.index }}</td>
+          <td>{{ row['reg_number'] }}</td>
+          <td>{{ row['player_name'] }}</td>
+          <td>{{ row['grid_size'] }}</td>
+          <td>{{ row['started_at'] }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="5">No registrations yet.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Leaderboard (Completed)</h2>
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Reg No</th>
+          <th>Player</th>
+          <th>Grid</th>
+          <th>Time (s)</th>
+          <th>Completed At</th>
+          <th>Image</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in rows %}
+        <tr>
+          <td>{{ loop.index }}</td>
+          <td>{{ row['reg_number'] }}</td>
+          <td>{{ row['player_name'] }}</td>
+          <td>{{ row['grid_size'] }}</td>
+          <td>{{ row['time_taken'] }}</td>
+          <td>{{ row['completed_at'] }}</td>
+          <td>{{ row['image_name'] }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="7">No games completed yet.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <a class="admin-link" href="{{ url_for('admin_logout') }}">Logout</a>
+</div>
+</body>
+</html>

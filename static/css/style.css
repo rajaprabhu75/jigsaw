@@ -1,0 +1,315 @@
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  background: #f4f2ff;
+  color: #222;
+  display: flex;
+  justify-content: center;
+  padding: 30px 15px;
+}
+
+/* Piping Harmony 2026 themed background — a single full-cover photo, not tiled */
+body.brand-bg {
+  background-color: #0f2437;
+  background-image:
+    linear-gradient(rgba(15,36,55,0.35), rgba(15,36,55,0.45)),
+    url('../img/background.jpg');
+  background-size: cover, cover;
+  background-position: center, center;
+  background-repeat: no-repeat, no-repeat;
+  background-attachment: fixed, fixed;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #ff8c42;
+  margin: 0 0 4px;
+}
+
+.reg-badge {
+  display: inline-block;
+  background: #f4f2ff;
+  color: #6a5af9;
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin: 0 0 14px;
+}
+
+.container {
+  width: 100%;
+  max-width: 480px;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 28px 26px 34px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+  text-align: center;
+}
+
+.container.wide {
+  max-width: 960px;
+}
+
+.container.registration-wide {
+  max-width: 620px;
+}
+
+.container.puzzle-wide {
+  max-width: 720px;
+}
+
+h1 {
+  margin-top: 0;
+  font-size: 1.6rem;
+}
+
+.subtitle {
+  color: #666;
+  margin-top: -8px;
+  margin-bottom: 20px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  gap: 6px;
+}
+
+label {
+  font-weight: 600;
+  margin-top: 12px;
+  font-size: 0.9rem;
+  color: #444;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="file"],
+select {
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+button {
+  margin-top: 22px;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #6a5af9, #d66efd);
+  color: #fff;
+  font-size: 1.05rem;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  transition: transform 0.15s ease;
+}
+
+button:hover { transform: translateY(-2px); }
+
+.flash {
+  background: #ffe1e1;
+  color: #b30000;
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-bottom: 14px;
+  font-size: 0.9rem;
+}
+
+.admin-link {
+  display: inline-block;
+  margin-top: 20px;
+  color: #6a5af9;
+  text-decoration: none;
+  font-size: 0.85rem;
+}
+
+.admin-link:hover { text-decoration: underline; }
+
+.hud {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+  margin-bottom: 16px;
+  font-size: 1rem;
+}
+
+#puzzle-board {
+  display: grid;
+  gap: 3px;
+  margin: 0 auto;
+  background: #333;
+  padding: 3px;
+  border-radius: 8px;
+}
+
+.tile {
+  background-repeat: no-repeat;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: outline 0.1s ease, transform 0.1s ease;
+  outline: 2px solid transparent;
+}
+
+.tile:hover {
+  transform: scale(0.97);
+}
+
+.tile.selected {
+  outline: 3px solid #ffcf33;
+  outline-offset: -3px;
+}
+
+.hint {
+  color: #777;
+  font-size: 0.85rem;
+  margin-top: 16px;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 30px 26px;
+  border-radius: 14px;
+  text-align: center;
+  max-width: 320px;
+}
+
+.modal-content button {
+  margin-top: 14px;
+}
+
+.final-image {
+  width: 100%;
+  max-width: 260px;
+  border-radius: 10px;
+  margin: 10px 0;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+}
+
+.table-scroll {
+  max-height: 320px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.export-btn {
+  display: inline-block;
+  background: #2f9e5b;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: transform 0.15s ease;
+}
+
+.export-btn:hover {
+  transform: translateY(-2px);
+}
+
+.admin-grid {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.panel {
+  flex: 1;
+  min-width: 240px;
+  background: #f9f9ff;
+  border-radius: 12px;
+  padding: 16px 18px;
+  text-align: left;
+}
+
+.panel h2 {
+  margin-top: 0;
+  font-size: 1.1rem;
+}
+
+.preview {
+  width: 100%;
+  max-height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+
+.muted {
+  color: #777;
+  font-size: 0.85rem;
+  margin: 4px 0 12px;
+}
+
+.stats {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-bottom: 22px;
+}
+
+.stat-box {
+  background: #f4f2ff;
+  border-radius: 12px;
+  padding: 16px 24px;
+  min-width: 120px;
+}
+
+.stat-box span {
+  display: block;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #6a5af9;
+}
+
+.stat-box label {
+  margin: 0;
+  font-weight: 500;
+  color: #555;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+th, td {
+  padding: 8px 10px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+}
+
+th {
+  background: #f4f2ff;
+  color: #444;
+}
